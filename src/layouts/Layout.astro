@@ -1,0 +1,97 @@
+---
+import { Icon } from 'astro-icon/components';
+import Navigation from '@/components/Navigation.astro';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+		<title>{title}</title>
+	</head>
+	<body>
+		<div id="root">
+			<div id="app">
+				<div id="wrapper">
+					<aside>
+						<nav>
+							<Navigation />
+						</nav>
+						<nav class="grow">
+							etc...
+						</nav>
+					</aside>
+					<main>
+						<slot />
+						<Icon name="tabler:align-box-left-stretch" />
+					</main>
+					<aside>
+						<div class="grow">a</div>
+					</aside>
+				</div>
+				<header id="player">
+					<nav>Lorem ipsum dolor sit amet</nav>
+					<nav>NAV</nav>
+					<nav>NAV</nav>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<style lang="sass">
+	#app
+		@apply w-full h-screen flex flex-col p-2 rounded-xl gap-2
+		& > #wrapper
+			@apply flex flex-row flex-grow gap-2
+			& > aside
+				@apply w-full max-w-96 flex flex-col items-stretch gap-2
+				& > *
+					@apply bg-slate-800 rounded-xl p-4
+					&.grow
+						@apply flex-grow
+			& > main
+				@apply flex-grow bg-slate-900 rounded-xl w-full p-4 overflow-y-auto
+		& > #player
+			@apply bg-red-500 p-2 grid grid-cols-3
+			& > nav
+				@apply bg-orange-500 justify-center
+				&:first-child
+					@apply justify-self-start
+				&:last-child
+					@apply justify-self-end
+</style>
+<style is:global>
+	html {
+		font-family: Quicksand, system-ui, sans-serif;
+		@apply bg-slate-950 text-slate-300;
+	}
+
+	code {
+		font-family:
+			Menlo,
+			Monaco,
+			Lucida Console,
+			Liberation Mono,
+			DejaVu Sans Mono,
+			Bitstream Vera Sans Mono,
+			Courier New,
+			monospace;
+	}
+</style>
